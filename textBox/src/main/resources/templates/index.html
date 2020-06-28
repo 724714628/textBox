@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TextBox</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body class="container">
+<!--<img th:src="@{/img/bg.jpg}">-->
+    <br>
+    <h1>"View" Page</h1>
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading">TextBox</div>
+        <table class="table table-striped">
+            <THEAD>
+                <tr>
+                    <th>fileName</th>
+                    <th>content</th>
+                </tr>
+            </THEAD>
+            <TBODY>
+                <tr th:each = "text:${all}">
+                    <td><a th:text="${text.textName}" th:href="${'/download/'+text.textId}"></a></td>
+                    <td th:text="${text.content}"></td>
+                    <td><a th:text="Edit" id="button" data-th-alt="${text.textId}"></a></td>
+                </tr>
+            </TBODY>
+        </table>
+    </div>
+    <a class="btn btn-info" href="/toAdd" role="button">Add</a>
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+    $(document).on('click', '#button', function(event) {
+        var textId = $(this).attr("alt");
+        $.ajax({
+            url:[[${#httpServletRequest.getContextPath()}]] + "/isLock/"+textId,
+            type:"post",
+            dataType:"json",
+            success: function (data1) {
+                if(data1){
+                    window.location.href="/edit"+"/"+textId;
+                }else{
+                    alert("有用户正在编辑，请稍后再试！");
+                }
+            }
+        });
+    })
+</script>
+</html>

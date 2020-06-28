@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TextBox</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body class="container">
+    <br>
+    <h1>"Edit" Page</h1>
+    <br>
+    <form action="/add" method="post"  class="form-horizontal">
+        <fieldset disabled>
+            <div class="form-group has-success has-feedback">
+                <label for="textId" class="col-sm-1 control-label">ID</label>
+                <div class="col-sm-5">
+                    <input type="text" th:value="${text.textId}"  placeholder="Disabled input" class="form-control" id="userId" aria-describedby="inputSuccess2Status">
+                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                    <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                </div>
+            </div>
+        </fieldset>
+        <input type="text" name="textId" th:value="${text.textId}" style="display:none">
+        <div class="form-group">
+            <label for="textName" class="col-sm-1 control-label">fileName</label>
+            <div class="col-sm-5">
+                <input id="textName" class="form-control" type="text" th:value="${text.textName}" name="textName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="content" class="col-sm-1 control-label">content</label>
+            <div class="col-sm-5">
+                <textarea type="text" id="content" class="form-control" th:text="${text.content}" name="content"></textarea>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" name="submit" value="Save">
+        &nbsp;&nbsp;&nbsp;
+        <a class="btn btn-info" th:href="${'/edit/'+text.textId}">Reset</a>
+        &nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success" href="/list">Index</a>
+    </form>
+</body>
+</html>

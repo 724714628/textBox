@@ -1,0 +1,38 @@
+#开发环境
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: zx
+    password: linhui520.
+    url: jdbc:mysql://47.107.147.219:3306/coopte_online?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  thymeleaf:
+    cache: false #开发时关闭缓存,不然没法看到实时页面
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    servlet:
+      content-type: text/html
+
+  #redis 配置
+  redis:
+    database: 0
+    host: 47.107.143.111 #127.0.0.1
+    lettuce:
+      pool:
+        max-active: 8   #最大连接数据库连接数,设 0 为没有限制
+        max-idle: 8     #最大等待连接中的数量,设 0 为没有限制
+        max-wait: -1ms  #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0     #最小等待连接中的数量,设 0 为没有限制
+      shutdown-timeout: 100ms
+    password: ''
+    port: 6379
